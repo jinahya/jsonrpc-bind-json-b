@@ -1,6 +1,5 @@
-package com.github.jinahya.jsonrpc.bind.v2.json.b;
+package com.github.jinahya.jsonrpc.bind.v2;
 
-import com.github.jinahya.jsonrpc.bind.v2.ResponseObject;
 import com.github.jinahya.jsonrpc.bind.v2.ResponseObject.ErrorObject;
 
 import javax.json.JsonValue;

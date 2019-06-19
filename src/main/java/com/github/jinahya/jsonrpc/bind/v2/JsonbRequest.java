@@ -1,6 +1,4 @@
-package com.github.jinahya.jsonrpc.bind.v2.json.b;
-
-import com.github.jinahya.jsonrpc.bind.v2.RequestObject;
+package com.github.jinahya.jsonrpc.bind.v2;
 
 import javax.json.JsonStructure;
 import javax.json.JsonValue;
