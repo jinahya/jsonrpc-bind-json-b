@@ -5,7 +5,7 @@ import javax.json.JsonString;
 
 import static java.util.Optional.ofNullable;
 
-public class JsonpUtils2 {
+public class JsonpUtils {
 
     // -----------------------------------------------------------------------------------------------------------------
     static <T extends JsonrpcObject<? extends JsonString>> String getIdAsString(final T object) {

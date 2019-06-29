@@ -25,62 +25,40 @@ import javax.json.JsonNumber;
 import javax.json.JsonObject;
 import javax.json.JsonString;
 import javax.json.JsonValue;
+import javax.json.bind.Jsonb;
 import javax.validation.constraints.AssertTrue;
-import java.util.List;
-import java.util.function.Function;
+import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
+public class JsonbServerRequest extends JsonbClientRequest<JsonValue, JsonValue> {
 
-public class JsonbServerRequest<ParamsType extends JsonValue, IdType extends JsonValue>
-        extends JsonbClientRequest<ParamsType, IdType> {
-
-    public static class Unknown extends JsonbServerRequest<JsonValue, JsonValue> {
-
-        public static Unknown of(final JsonObject jsonObject) {
-            final Unknown instance = new Unknown();
-            try {
-                instance.setJsonrpc(jsonObject.getString(PROPERTY_NAME_JSONRPC));
-            } catch (NullPointerException | ClassCastException e) {
-                // (omitted|invalid) $.jsonrpc
-                instance.setJsonrpc(null);
-            }
-            try {
-                instance.setMethod(jsonObject.getString(PROPERTY_NAME_METHOD));
-            } catch (NullPointerException | ClassCastException e) {
-                instance.setMethod(null);
-            }
-            try {
-                instance.setParams(jsonObject.get(PROPERTY_NAME_PARAMS));
-            } catch (NullPointerException | ClassCastException e) {
-                instance.setParams(null);
-            }
-            try {
-                instance.setId(jsonObject.get(PROPERTY_NAME_ID));
-            } catch (NullPointerException | ClassCastException e) {
-                instance.setId(null);
-            }
-            return instance;
-        }
-
-        public <T extends JsonValue, U> List<U> getParamsAsArray(final Class<? extends T> valueClass,
-                                                                 final Function<? super T, ? extends U> valueMapper) {
-            return getParams().asJsonArray().getValuesAs(valueClass).stream().map(valueMapper).collect(toList());
-        }
-
-        public <U> List<U> getParamsAsArray(final Function<? super JsonValue, ? extends U> valueMapper) {
-            return getParamsAsArray(JsonValue.class, valueMapper);
-        }
-    }
-
+    // -----------------------------------------------------------------------------------------------------------------
     @AssertTrue
     private boolean isParamsEitherJsonArrayOrJsonObject() {
-        final ParamsType params = getParams();
+        final JsonValue params = getParams();
         return params == null || params instanceof JsonArray || params instanceof JsonObject;
     }
 
     @AssertTrue
     private boolean isIdEitherJsonStringOrJsonNumber() {
-        final IdType id = getId();
+        final JsonValue id = getId();
         return id == null || id instanceof JsonString || id instanceof JsonNumber;
+    }
+
+    // ---------------------------------------------------------------------------------------------------------- params
+    public <T> T getParamsAsNamed(final Jsonb jsonb, final Class<? extends T> clazz) {
+        final JsonValue params = getParams();
+        if (params == null) {
+            return null;
+        }
+        // https://stackoverflow.com/a/55677645/330457
+        return jsonb.fromJson(params.asJsonObject().toString(), clazz); // ClassCastException
+    }
+
+    public <T> Stream<T> getParamsAsPositioned(final Jsonb jsonb, final Class<? extends T> clazz) {
+        final JsonValue params = getParams();
+        if (params == null) {
+            return null;
+        }
+        return params.asJsonArray().stream().map(v -> jsonb.fromJson(v.toString(), clazz)); // ClassCastException
     }
 }

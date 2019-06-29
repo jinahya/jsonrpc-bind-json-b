@@ -49,7 +49,7 @@
     <version.com.fasterxml.jackson.core>2.9.9</version.com.fasterxml.jackson.core>
     <version.org.apache.johnzon>1.1.12</version.org.apache.johnzon>
     <version.org.junit.jupiter>5.4.2</version.org.junit.jupiter>
-    <version.jsonrpc-bind>0.2.4-SNAPSHOT</version.jsonrpc-bind>
+    <version.jsonrpc-bind>0.4.2-SNAPSHOT</version.jsonrpc-bind>
   </properties>
 
   <dependencyManagement>

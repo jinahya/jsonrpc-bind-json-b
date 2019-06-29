@@ -24,7 +24,17 @@ import com.github.jinahya.jsonrpc.bind.v2.ResponseObject.ErrorObject;
 
 import javax.json.JsonValue;
 
-public class JsonbServerResponse<ResultType, ErrorType extends ErrorObject<?>, IdType extends JsonValue>
-        extends JsonbClientResponse<ResultType, ErrorType, IdType> {
+public class JsonbServerResponse extends JsonbClientResponse<JsonValue, ErrorObject<JsonValue>, JsonValue> {
 
+    // -----------------------------------------------------------------------------------------------------------------
+    @Override
+    protected boolean isResultSemanticallyNull() {
+        return super.isResultSemanticallyNull();
+    }
+
+    @Override
+    protected boolean isErrorSemanticallyNull() {
+        return super.isErrorSemanticallyNull();
+    }
+    // -----------------------------------------------------------------------------------------------------------------
 }

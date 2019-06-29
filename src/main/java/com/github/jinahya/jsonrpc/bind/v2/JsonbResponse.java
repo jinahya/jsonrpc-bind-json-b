@@ -22,11 +22,7 @@ package com.github.jinahya.jsonrpc.bind.v2;
 
 import com.github.jinahya.jsonrpc.bind.v2.ResponseObject.ErrorObject;
 
-public abstract class JsonbResponse<ResultType, ErrorType extends ErrorObject<?>, IdType>
+public class JsonbResponse<ResultType, ErrorType extends ErrorObject<?>, IdType>
         extends ResponseObject<ResultType, ErrorType, IdType> {
 
-    static <T extends JsonbResponse<U, V, W>, U, V extends ErrorObject<?>, W> T jsonbResponseOf(
-            final Class<? extends T> objectClass, final U result, final V error, final W id) {
-        return ResponseObject.of(objectClass, result, error, id);
-    }
 }
