@@ -32,6 +32,15 @@ import java.util.stream.Stream;
 public class JsonbServerRequest extends JsonbClientRequest<JsonValue, JsonValue> {
 
     // -----------------------------------------------------------------------------------------------------------------
+    public static JsonbServerRequest of(final JsonObject jsonObject) {
+        final JsonbServerRequest instance = new JsonbServerRequest();
+        instance.setJsonrpc(jsonObject.getString(PROPERTY_NAME_JSONRPC));
+        instance.setParams(jsonObject.get(PROPERTY_NAME_PARAMS));
+        instance.setId(jsonObject.get(PROPERTY_NAME_ID));
+        return instance;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
     @AssertTrue
     private boolean isParamsEitherJsonArrayOrJsonObject() {
         final JsonValue params = getParams();
@@ -54,7 +63,7 @@ public class JsonbServerRequest extends JsonbClientRequest<JsonValue, JsonValue>
         return jsonb.fromJson(params.asJsonObject().toString(), clazz); // ClassCastException
     }
 
-    public <T> Stream<T> getParamsAsPositioned(final Jsonb jsonb, final Class<? extends T> clazz) {
+    public <T> Stream<T> getParamsAsPositional(final Jsonb jsonb, final Class<? extends T> clazz) {
         final JsonValue params = getParams();
         if (params == null) {
             return null;
