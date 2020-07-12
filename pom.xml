@@ -45,12 +45,12 @@
     <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
     <maven.compiler.testSource>${maven.compiler.source}</maven.compiler.testSource>
     <maven.compiler.testTarget>${maven.compiler.testSource}</maven.compiler.testTarget>
-    <version.maven-surefire>3.0.0-M3</version.maven-surefire>
     <version.jakarta.json>2.0.0-RC3</version.jakarta.json>
     <version.jakarta.json.bind>2.0.0-RC2</version.jakarta.json.bind>
-    <version.org.apache.johnzon>1.2.8</version.org.apache.johnzon>
     <version.jsonrpc-bind>0.7.1-SNAPSHOT</version.jsonrpc-bind>
     <version.jsonrpc-bind-tests>${version.jsonrpc-bind}</version.jsonrpc-bind-tests>
+    <version.maven-surefire>3.0.0-M3</version.maven-surefire>
+    <version.org.apache.johnzon>1.2.8</version.org.apache.johnzon>
   </properties>
 
   <dependencyManagement>
@@ -114,7 +114,7 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.12</version>
-      <scope>test</scope>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
@@ -362,25 +362,8 @@
       <dependencies>
         <dependency>
           <groupId>org.apache.johnzon</groupId>
-          <artifactId>johnzon-core</artifactId>
-          <version>${version.org.apache.johnzon}</version>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.apache.johnzon</groupId>
           <artifactId>johnzon-jsonb</artifactId>
           <scope>test</scope>
-          <!-- https://issues.apache.org/jira/browse/JOHNZON-214 -->
-          <exclusions>
-            <exclusion>
-              <groupId>org.apache.johnzon</groupId>
-              <artifactId>johnzon-core</artifactId>
-            </exclusion>
-            <exclusion>
-              <groupId>org.apache.johnzon</groupId>
-              <artifactId>johnzon-mapper</artifactId>
-            </exclusion>
-          </exclusions>
         </dependency>
       </dependencies>
     </profile>
