@@ -21,17 +21,17 @@ package com.github.jinahya.jsonrpc.bind.v2;
  */
 
 import com.github.jinahya.jsonrpc.bind.JsonrpcBindException;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonNumber;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
+import jakarta.json.JsonString;
+import jakarta.json.JsonStructure;
+import jakarta.json.JsonValue;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbException;
+import jakarta.json.bind.annotation.JsonbProperty;
 
-import javax.json.JsonArray;
-import javax.json.JsonNumber;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
-import javax.json.JsonString;
-import javax.json.JsonStructure;
-import javax.json.JsonValue;
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbException;
-import javax.json.bind.annotation.JsonbProperty;
 import javax.validation.constraints.AssertTrue;
 import java.io.StringReader;
 import java.math.BigInteger;
@@ -40,10 +40,10 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.github.jinahya.jsonrpc.bind.v2.JsonbJsonrpcConfiguration.getJsonb;
+import static jakarta.json.Json.createArrayBuilder;
+import static jakarta.json.Json.createReader;
+import static jakarta.json.Json.createValue;
 import static java.util.Objects.requireNonNull;
-import static javax.json.Json.createArrayBuilder;
-import static javax.json.Json.createReader;
-import static javax.json.Json.createValue;
 
 public class JsonbJsonrpcRequestMessage
         extends AbstractJsonrpcRequestMessage

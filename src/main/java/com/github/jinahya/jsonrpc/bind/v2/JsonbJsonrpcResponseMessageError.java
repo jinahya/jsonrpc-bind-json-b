@@ -20,21 +20,22 @@ package com.github.jinahya.jsonrpc.bind.v2;
  * #L%
  */
 
-import javax.json.JsonArray;
-import javax.json.JsonReader;
-import javax.json.JsonValue;
-import javax.json.bind.Jsonb;
-import javax.json.bind.annotation.JsonbProperty;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonReader;
+import jakarta.json.JsonValue;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.annotation.JsonbProperty;
+
 import javax.validation.constraints.AssertTrue;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.github.jinahya.jsonrpc.bind.v2.JsonbJsonrpcConfiguration.getJsonb;
+import static jakarta.json.Json.createArrayBuilder;
+import static jakarta.json.Json.createReader;
 import static java.util.Collections.singletonList;
 import static java.util.Objects.requireNonNull;
-import static javax.json.Json.createArrayBuilder;
-import static javax.json.Json.createReader;
 
 public class JsonbJsonrpcResponseMessageError
         extends AbstractJsonrpcResponseMessageError

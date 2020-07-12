@@ -21,9 +21,9 @@ package com.github.jinahya.jsonrpc.bind.v2;
  */
 
 import com.github.jinahya.jsonrpc.bind.JsonrpcBindException;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbException;
 
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbException;
 import java.lang.reflect.Method;
 
 import static com.github.jinahya.jsonrpc.bind.v2.JsonbJsonrpcConfiguration.getJsonb;
